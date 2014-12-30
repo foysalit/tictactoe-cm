@@ -3,13 +3,17 @@ angular
     .controller('TttController', TttController);
     TttController.$inject = ['$firebase'];
 
-function TttController($firebase) { //"the container for the rest of the stuff"
+function TttController($firebase) {      //"the container for the rest of the stuff"
     var self = this;
+
     self.startGame = startGame;
     self.resetGame = resetGame;
-    // self.catsGame = catsGame;
     self.playGrid = playGrid;
     self.isSet = isSet;
+    self.tieGame = tieGame;
+    self.playerOwin = playerOwin;
+    self.playerXwin = playerXwin;
+    self.chooseCell = chooseCell;
 
     
 // var gameBoard = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]; //how gameboard should look at the start of each game
@@ -21,10 +25,23 @@ function startGame() {
     self.xturn = true;  
     self.oturn = false;
 }   
-    startGame();
+
+/*
+function chooseCell() {
+    for (var i = 0; i < 3; i++) {
+
+        for (var j = 0; j < 3; j++) {
+
+        if(self.grid[i][j].cellState == "x" || self.grid[i][j].cellState == "o") {
+            alert("Choose another square");
+
+        }
+        }
+    }
+} */
 
 function playGrid(row, column) {       //turn-taking between players
-    console.log(self.xturn);
+    //console.log(self.xturn);
     if(self.xturn === true) {
     self.gameBoard[row][column] = "x";  
     }
@@ -33,6 +50,7 @@ function playGrid(row, column) {       //turn-taking between players
     self.gameBoard[row][column] = "o";
     }
     self.xturn = !self.xturn; 
+
   }
 
 function resetGame() {              //when players press "reset" button, gameboard becomes empty again
@@ -41,18 +59,14 @@ function resetGame() {              //when players press "reset" button, gameboa
     self.oturn = false;
 }
 
-// function catsGame() {               //"cats game" - computer checks self only when all 9 squares have been played
-//     if (var x = 0; x <= gameBoard.length; x++) {
-//         alert("Better luck next time!");
-//         reset();
-//     } 
-// }
 function isSet(something, square) {
     return (something & square) == square;
 }
 
 //conditions for "x" to win the game
 function playerXwin() {
+
+   
 
     for (var i = 0; i < 3; i++) {
 
@@ -61,52 +75,54 @@ function playerXwin() {
             if(self.grid[0][0].cellState == "x" && 
             self.grid[0][1].cellState == "x" && self.grid[0][2].cellState == "x") {
                 alert("x wins");
-                return true;                 
-           } 
+                              
+            } 
 
             if(self.grid[1][0].cellState == "x" && 
             self.grid[1][1].cellState == "x" && self.grid[1][2].cellState == "x") {
                 alert("x wins");  
-                return true;                  
+                              
             }
 
             if(self.grid[2][0].cellState == "x" &&
             self.grid[2][1].cellState == "x" && self.grid[2][2].cellState == "x") {
                 alert("x wins");    
-                return true;                
+                              
             }
 
             if(self.grid[0][0].cellState == "x" &&
              self.grid[1][0].cellState == "x" && self.grid[2][0].cellState == "x") {
                 alert("x wins");     
-                return true;               
+                             
             }
 
             if(self.grid[1][0].cellState == "x" &&
             self.grid[1][1].cellState == "x" && self.grid[1][2].cellState == "x") {
                 alert("x wins");     
-                return true;               
+                              
             }
             if(self.grid[2][0].cellState == "x" &&
             self.grid[2][1].cellState == "x" && self.grid[2][2].cellState == "x") {
                 alert("x wins"); 
-                return true;                       
+                                    
             }
             if(self.grid[0][0].cellState == "x" &&
             self.grid[1][1].cellState == "x" && self.grid[2][2].cellState == "x") {
                 alert("x wins");  
-                return true;                  
+                               
             }
             if(self.grid[0][2].cellState == "x" &&
              self.grid[1][1].cellState == "x" && self.grid[2][0].cellState == "x") {
                 alert("x wins");  
-                return true;                  
+                                 
             }
         }    
     }
 }      
-//conditions for "y" to win the game  
-function playerYwin() {
+//conditions for "o" to win the game  
+function playerOwin() {
+
+ 
 
     for (var i = 0; i < 3; i++) {
 
@@ -115,70 +131,79 @@ function playerYwin() {
             if(self.grid[0][0].cellState == "o" &&
              self.grid[0][1].cellState == "o" && self.grid[0][2].cellState == "o") {
                 alert("o wins");  
-                return true;                  
+                                
             }
 
             if(self.grid[1][0].cellState == "o" &&
              self.grid[1][1].cellState == "o" && self.grid[1][2].cellState == "o") {
                 alert("o wins");  
-                return true;                  
+                                
             }
 
             if(self.grid[2][0].cellState == "o" &&
             self.grid[2][1].cellState == "o" && self.grid[2][2].cellState == "o") {
                 alert("o wins");  
-                return true;                  
+                               
             }
 
             if(self.grid[0][0].cellState == "o" &&
             self.grid[1][0].cellState == "o" && self.grid[2][0].cellState == "o") {
                 alert("o wins");    
-                return true;                
+                           
             }
 
             if(self.grid[1][0].cellState == "o" &&
              self.grid[1][1].cellState == "o" && self.grid[1][2].cellState == "o") {
                 alert("o wins");  
-                return true;                  
+                              
             }
 
             if(self.grid[2][0].cellState == "o" &&
              self.grid[2][1].cellState == "o" && self.grid[2][2].cellState == "o") {
                 alert("o wins"); 
-                return true;                   
+                               
             }
 
             if(self.grid[0][0].cellState == "o" &&
             self.grid[1][1].cellState == "o" && self.grid[2][2].cellState == "o") {
                 alert("o wins");   
-                return true;                 
+                                
             }
 
             if(self.grid[0][2].cellState == "o" &&
              self.grid[1][1].cellState == "o" && self.grid[2][0].cellState == "o") {
                 alert("o wins");  
-                return true;     
-            }    
+                  
+            }
+        }  
+    }
+}             
 
-            //conditions for tie in the game
-            else {
-                if (((self.grid[0][0].cellState == "x") || (self.grid[0][0].cellState == "o")) &&
-                    ((self.grid[0][1].cellState == "x") || (self.grid[0][1].cellState == "o")) &&
-                    ((self.grid[0][2].cellState == "x") || (self.grid[0][2].cellState == "o")) &&
-                    ((self.grid[1][0].cellState == "x") || (self.grid[1][0].cellState == "o")) &&
-                    ((self.grid[1][1].cellState == "x") || (self.grid[1][1].cellState == "o")) &&
-                    ((self.grid[1][2].cellState == "x") || (self.grid[1][2].cellState == "o")) &&
-                    ((self.grid[2][0].cellState == "x") || (self.grid[2][0].cellState == "o")) &&
-                    ((self.grid[2][1].cellState == "x") || (self.grid[2][1].cellState == "o")) &&
-                    ((self.grid[2][2].cellState == "x") || (self.grid[2][2].cellState == "o"))) {
-                    alert("It's a tie!");
-                    return true;
-                    }              
-                }    
-                             
+            // tie in the game
+function tieGame() {
+
+    
+    for (var i = 0; i < 3; i++) {
+
+        for (var j = 0; j < 3; j++) {            
+            if (((self.grid[0][0].cellState == "x") || (self.grid[0][0].cellState == "o")) &&
+                ((self.grid[0][1].cellState == "x") || (self.grid[0][1].cellState == "o")) &&
+                ((self.grid[0][2].cellState == "x") || (self.grid[0][2].cellState == "o")) &&
+                ((self.grid[1][0].cellState == "x") || (self.grid[1][0].cellState == "o")) &&
+                ((self.grid[1][1].cellState == "x") || (self.grid[1][1].cellState == "o")) &&
+                ((self.grid[1][2].cellState == "x") || (self.grid[1][2].cellState == "o")) &&
+                ((self.grid[2][0].cellState == "x") || (self.grid[2][0].cellState == "o")) &&
+                ((self.grid[2][1].cellState == "x") || (self.grid[2][1].cellState == "o")) &&
+                ((self.grid[2][2].cellState == "x") || (self.grid[2][2].cellState == "o"))) {
+                alert("it's a tie!");
+                }
+
+                }                   
             }
         }
-    }
-};  
+}
+
+
+
 
 

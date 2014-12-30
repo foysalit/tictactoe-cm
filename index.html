@@ -10,18 +10,29 @@
 	<script src="js/tttController.js"></script>
 </head>
 
-	<body ng-controller = "TttController as game">	
+<body ng-controller = "TttController as game">	
 
 	
 <div class="container">
 	<header>
-		<h1>TIC TAC TOE</h1>
+		<h1>Tic Tac Toe</h1>
 	</header>
 	<br>
 	<main>
-
-<!--checks if it's an x. In css, if it's "x", assigns one color. If it's "o", assigns square another color   --> 	    
-		
+	<div ng-show ="playerXwin" class="playerXwin"><p>x wins</p></div>
+	<div ng-show ="playerYwin" class="playerOwin"><p>o wins</p></div>
+	<div ng-show ="tieGame" class="itsatie"><p>it's a tie!</p></div>
+   	<p>Pick a team:
+   		<br>
+   		<label>
+   			<input type="radio" value="X" ng-model="playerX" /><strong>X</strong>
+		</label>
+		<label>
+			<input type="radio" value="O" ng-model="playerO" /><strong>O</strong>
+		</label>
+	</p>	
+	<h2 ng-show="currentPlayer == player">It's your turn</h2>	
+	<h2 ng-show="currentPlayer != player">Wait your turn, please</h2>
 
 		<table class="grid"><!--  ng-click="game.changeColor(square)" ng-class=" { yellow: game.isSet(game.xturn, square), blue: game.isSet(game.oturn, square) }"> -->
 	      	<tr>
@@ -42,9 +53,6 @@
                	<td ng-click="game.playGrid(2,2)">{{ game.gameBoard[2][2] }}</td>
             </tr>
         </table>      
-	
-		<section class=></section>
-   		<br>
    		<button class="btn btn-play-again" ng-click="game.resetGame()">new game</button>
    	</main>
 </div>
